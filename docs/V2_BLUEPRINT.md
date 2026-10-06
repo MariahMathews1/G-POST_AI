@@ -1,6 +1,6 @@
 # Creo NC G-POST Companion V2 Blueprint
 
-This is a plan for a minimal engineering companion, written for NC programmers and developers learning the project. Nothing described as future architecture is implemented yet. This phase creates only `README.md` and this document.
+This is a plan for a minimal engineering companion, written for NC programmers and developers learning the project. Current implementation status: **V2 Sprint 0/1 — UI shell only.** The React frontend contains routing, navigation, a neutral green theme, empty screens, a non-saving form preview, and static demo workspaces. No backend, persistence, extraction, Azure, MATLAB, OFG logic, FIL generation, or exports are implemented. Architecture and later-sprint capabilities below remain proposals.
 
 **NC** means numerical control: instructions used to operate a CNC machine. A **postprocessor** converts manufacturing instructions from a CAM system into output suited to a machine and controller. **CAM** means computer-aided manufacturing. The Companion assists the engineering work around that postprocessor; the official tools perform their existing jobs.
 
@@ -156,11 +156,12 @@ A Machine represents one physical CNC machine/controller context. Minimum fields
 | Overview | Show identity, notes, status, and an obvious next action. |
 | Documents | View evidence sources belonging to this machine. |
 | Machine Profile | Review proposed facts, confirmed facts, and information gaps. |
+| Shop Knowledge | Show practical machine knowledge from programmers, operators, and shop-floor experience; currently an empty placeholder. |
 | Posts | Open or create this machine's post development records. |
 
 ```text
 Machine: KLS-1840N
-[Overview] [Documents] [Machine Profile] [Posts]
+[Overview] [Documents] [Machine Profile] [Shop Knowledge] [Posts]
 Manufacturer: …   Model: …   Controller: …
 Status: Active
 Next action: Review machine facts

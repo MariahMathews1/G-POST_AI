@@ -1,0 +1,23 @@
+:root {
+  --color-primary: #6ba43a;
+  --color-primary-hover: #355d1c;
+  --color-primary-strong: #3f6d22;
+  --color-primary-soft: #edf4e6;
+  --color-background: #f6f7f5;
+  --color-bg: var(--color-background);
+  --color-surface: #ffffff;
+  --color-text: #242824;
+  --color-text-muted: #60685f;
+  --color-border: #dfe3dd;
+  --color-focus: #3f6d22;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --sidebar-width: 236px;
+}
