@@ -1,22 +1,41 @@
+import { Link } from "react-router";
 import EmptyState from "../../../components/shared/EmptyState";
-export default function MachineDocumentsTab() {
+import DocumentList from "../../documents/DocumentList";
+export default function MachineDocumentsTab({
+  machineId,
+}: {
+  machineId: string;
+}) {
   return (
     <>
       <div className="section-header">
         <div>
           <h2>Documents</h2>
-          <p>Machine and controller references associated with this machine.</p>
+          <p>Reference documents associated with this machine.</p>
         </div>
-        <button className="button primary" disabled>
-          Upload Document
-        </button>
+        {machineId === "demo" ? (
+          <button className="button primary" disabled>
+            Upload Document
+          </button>
+        ) : (
+          <Link
+            className="button primary"
+            to={`/documents/upload?machine_id=${encodeURIComponent(machineId)}`}
+          >
+            Upload Document
+          </Link>
+        )}
       </div>
-      <section className="panel">
-        <EmptyState
-          title="No documents have been added for this machine."
-          description="Document upload will be available in a later sprint."
-        />
-      </section>
+      {machineId === "demo" ? (
+        <section className="panel">
+          <EmptyState
+            title="This static demo machine is not saved."
+            description="Add a Machine to upload and associate reference documents."
+          />
+        </section>
+      ) : (
+        <DocumentList key={machineId} machineId={machineId} />
+      )}
     </>
   );
 }

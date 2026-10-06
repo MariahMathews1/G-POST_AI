@@ -1,0 +1,657 @@
+{
+  "categories": [
+    {
+      "key": "identity",
+      "display_name": "Machine & Controller",
+      "display_order": 1
+    },
+    {
+      "key": "kinematics",
+      "display_name": "Kinematics & Limits",
+      "display_order": 2
+    },
+    {
+      "key": "modal",
+      "display_name": "Modal Rules & Commands",
+      "display_order": 3
+    },
+    {
+      "key": "behavior",
+      "display_name": "Cycles & Machine Behavior",
+      "display_order": 4
+    },
+    {
+      "key": "sequences",
+      "display_name": "Safe Start / Header / Footer",
+      "display_order": 5
+    }
+  ],
+  "definitions": [
+    {
+      "key": "machine_manufacturer",
+      "display_name": "Machine Manufacturer",
+      "description": "Record the reviewed machine manufacturer for this machine and controller.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 1,
+      "machine_field": "manufacturer"
+    },
+    {
+      "key": "machine_model",
+      "display_name": "Machine Model",
+      "description": "Record the reviewed machine model for this machine and controller.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 2,
+      "machine_field": "model"
+    },
+    {
+      "key": "machine_type",
+      "display_name": "Machine Type",
+      "description": "Record the reviewed machine type for this machine and controller.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 3,
+      "machine_field": "machine_type"
+    },
+    {
+      "key": "controller_manufacturer",
+      "display_name": "Controller Manufacturer",
+      "description": "Record the reviewed controller manufacturer for this machine and controller.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 4
+    },
+    {
+      "key": "controller_model",
+      "display_name": "Controller Model",
+      "description": "Controller description from the Machine record. Edit the Machine to change it.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 5,
+      "machine_field": "controller"
+    },
+    {
+      "key": "controller_version",
+      "display_name": "Controller Series / Version",
+      "description": "Record the reviewed controller series / version for this machine and controller.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 6
+    },
+    {
+      "key": "programming_units",
+      "display_name": "Programming Units",
+      "description": "Record the reviewed programming units for this machine and controller.",
+      "category": "identity",
+      "value_type": "choice",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 7,
+      "choices": [
+        "Metric",
+        "Imperial",
+        "Both"
+      ]
+    },
+    {
+      "key": "controlled_axes",
+      "display_name": "Number of Controlled Axes",
+      "description": "Record the reviewed number of controlled axes for this machine and controller.",
+      "category": "identity",
+      "value_type": "integer",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 8
+    },
+    {
+      "key": "linear_axes",
+      "display_name": "Linear Axes",
+      "description": "Record the reviewed linear axes for this machine and controller.",
+      "category": "identity",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 9
+    },
+    {
+      "key": "rotary_axes",
+      "display_name": "Rotary Axes",
+      "description": "Record the reviewed rotary axes for this machine and controller.",
+      "category": "identity",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "Mill",
+        "Mill-Turn"
+      ],
+      "normally_important": false,
+      "display_order": 10
+    },
+    {
+      "key": "axis_configuration",
+      "display_name": "Axis Configuration",
+      "description": "Record the reviewed axis configuration for this machine and controller.",
+      "category": "identity",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 11,
+      "future_use": "May inform future Post / OFG development after engineering review. No mapping or generation is performed here."
+    },
+    {
+      "key": "x_minimum",
+      "display_name": "X Axis Minimum",
+      "description": "Record the reviewed x axis minimum for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm",
+        "in"
+      ],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 12
+    },
+    {
+      "key": "x_maximum",
+      "display_name": "X Axis Maximum",
+      "description": "Record the reviewed x axis maximum for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm",
+        "in"
+      ],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 13
+    },
+    {
+      "key": "y_minimum",
+      "display_name": "Y Axis Minimum",
+      "description": "Record the reviewed y axis minimum for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm",
+        "in"
+      ],
+      "applicable_machine_types": [
+        "Mill",
+        "Mill-Turn"
+      ],
+      "normally_important": true,
+      "display_order": 14
+    },
+    {
+      "key": "y_maximum",
+      "display_name": "Y Axis Maximum",
+      "description": "Record the reviewed y axis maximum for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm",
+        "in"
+      ],
+      "applicable_machine_types": [
+        "Mill",
+        "Mill-Turn"
+      ],
+      "normally_important": true,
+      "display_order": 15
+    },
+    {
+      "key": "z_minimum",
+      "display_name": "Z Axis Minimum",
+      "description": "Record the reviewed z axis minimum for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm",
+        "in"
+      ],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 16
+    },
+    {
+      "key": "z_maximum",
+      "display_name": "Z Axis Maximum",
+      "description": "Record the reviewed z axis maximum for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm",
+        "in"
+      ],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 17
+    },
+    {
+      "key": "maximum_spindle_speed",
+      "display_name": "Maximum Spindle Speed",
+      "description": "Record the reviewed maximum spindle speed for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "rpm"
+      ],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 18,
+      "future_use": "May inform OFG spindle configuration after engineering review; no configuration is applied here."
+    },
+    {
+      "key": "maximum_feedrate",
+      "display_name": "Maximum Feedrate",
+      "description": "Record the reviewed maximum feedrate for this machine and controller.",
+      "category": "kinematics",
+      "value_type": "number",
+      "allowed_units": [
+        "mm/min",
+        "in/min"
+      ],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 19
+    },
+    {
+      "key": "rotary_axis_definition",
+      "display_name": "Rotary Axis Definition",
+      "description": "Record each rotary axis, minimum and maximum angle in degrees, and whether it is continuous. No kinematic inference is performed.",
+      "category": "kinematics",
+      "value_type": "rotary_axes",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "Mill",
+        "Mill-Turn"
+      ],
+      "normally_important": false,
+      "display_order": 20
+    },
+    {
+      "key": "supported_g_codes",
+      "display_name": "Supported G-Codes",
+      "description": "Record the reviewed supported g-codes for this machine and controller.",
+      "category": "modal",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 21
+    },
+    {
+      "key": "supported_m_codes",
+      "display_name": "Supported M-Codes",
+      "description": "Record the reviewed supported m-codes for this machine and controller.",
+      "category": "modal",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 22
+    },
+    {
+      "key": "modal_groups",
+      "display_name": "Modal Groups",
+      "description": "Record the reviewed modal groups for this machine and controller.",
+      "category": "modal",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 23
+    },
+    {
+      "key": "modal_defaults",
+      "display_name": "Preferred Modal Defaults",
+      "description": "Record the reviewed preferred modal defaults for this machine and controller.",
+      "category": "modal",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 24,
+      "future_use": "May inform future Post / OFG development after engineering review. No mapping or generation is performed here."
+    },
+    {
+      "key": "default_plane",
+      "display_name": "Default Plane",
+      "description": "Record the reviewed default plane for this machine and controller.",
+      "category": "modal",
+      "value_type": "choice",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 25,
+      "choices": [
+        "XY (G17)",
+        "XZ (G18)",
+        "YZ (G19)"
+      ]
+    },
+    {
+      "key": "distance_mode",
+      "display_name": "Default Distance Mode",
+      "description": "Record the reviewed default distance mode for this machine and controller.",
+      "category": "modal",
+      "value_type": "choice",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 26,
+      "choices": [
+        "Absolute",
+        "Incremental"
+      ]
+    },
+    {
+      "key": "feed_mode",
+      "display_name": "Default Feed Mode",
+      "description": "Record the reviewed default feed mode for this machine and controller.",
+      "category": "modal",
+      "value_type": "choice",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 27,
+      "choices": [
+        "Per minute",
+        "Per revolution",
+        "Inverse time"
+      ]
+    },
+    {
+      "key": "units_mode",
+      "display_name": "Default Units Mode",
+      "description": "Record the reviewed default units mode for this machine and controller.",
+      "category": "modal",
+      "value_type": "choice",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 28,
+      "choices": [
+        "Metric",
+        "Imperial"
+      ]
+    },
+    {
+      "key": "spindle_mode",
+      "display_name": "Default Spindle Mode",
+      "description": "Record the reviewed default spindle mode for this machine and controller.",
+      "category": "modal",
+      "value_type": "choice",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 29,
+      "choices": [
+        "Fixed RPM",
+        "Constant surface speed"
+      ]
+    },
+    {
+      "key": "cycles_drilling",
+      "display_name": "Supported Drilling Cycles",
+      "description": "Record the reviewed supported drilling cycles for this machine and controller.",
+      "category": "behavior",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 30
+    },
+    {
+      "key": "cycles_peck_drilling",
+      "display_name": "Supported Peck Drilling Cycles",
+      "description": "Record the reviewed supported peck drilling cycles for this machine and controller.",
+      "category": "behavior",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 31
+    },
+    {
+      "key": "cycles_counterboring",
+      "display_name": "Supported Counterboring Cycles",
+      "description": "Record the reviewed supported counterboring cycles for this machine and controller.",
+      "category": "behavior",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 32
+    },
+    {
+      "key": "cycles_tapping",
+      "display_name": "Supported Tapping Cycles",
+      "description": "Record the reviewed supported tapping cycles for this machine and controller.",
+      "category": "behavior",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 33
+    },
+    {
+      "key": "cycles_boring",
+      "display_name": "Supported Boring Cycles",
+      "description": "Record the reviewed supported boring cycles for this machine and controller.",
+      "category": "behavior",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 34
+    },
+    {
+      "key": "cycles_threading",
+      "display_name": "Supported Threading Cycles",
+      "description": "Record the reviewed supported threading cycles for this machine and controller.",
+      "category": "behavior",
+      "value_type": "list",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "Lathe",
+        "Mill-Turn",
+        "Swiss"
+      ],
+      "normally_important": true,
+      "display_order": 35
+    },
+    {
+      "key": "tool_change",
+      "display_name": "Tool Change Behavior",
+      "description": "Record the reviewed tool change behavior for this machine and controller.",
+      "category": "behavior",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 36,
+      "future_use": "May inform OFG tool change settings and FIL / custom logic requirements; no mapping or generation is performed here."
+    },
+    {
+      "key": "work_offset",
+      "display_name": "Work Offset Behavior",
+      "description": "Record the reviewed work offset behavior for this machine and controller.",
+      "category": "behavior",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 37
+    },
+    {
+      "key": "spindle_orientation",
+      "display_name": "Spindle Orientation Behavior",
+      "description": "Record the reviewed spindle orientation behavior for this machine and controller.",
+      "category": "behavior",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 38
+    },
+    {
+      "key": "safe_start",
+      "display_name": "Safe Start Sequence",
+      "description": "Describe the reviewed engineering requirements in plain text. This worksheet does not generate a program.",
+      "category": "sequences",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 39,
+      "future_use": "May inform future Post / OFG development after engineering review. No mapping or generation is performed here."
+    },
+    {
+      "key": "program_header",
+      "display_name": "Program Header Requirements",
+      "description": "Describe the reviewed engineering requirements in plain text. This worksheet does not generate a program.",
+      "category": "sequences",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 40,
+      "future_use": "May inform future Post / OFG development after engineering review. No mapping or generation is performed here."
+    },
+    {
+      "key": "program_end",
+      "display_name": "Program End Sequence",
+      "description": "Describe the reviewed engineering requirements in plain text. This worksheet does not generate a program.",
+      "category": "sequences",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 41,
+      "future_use": "May inform future Post / OFG development after engineering review. No mapping or generation is performed here."
+    },
+    {
+      "key": "reset_conditions",
+      "display_name": "Reset Conditions",
+      "description": "Describe the reviewed engineering requirements in plain text. This worksheet does not generate a program.",
+      "category": "sequences",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 42
+    },
+    {
+      "key": "required_modal",
+      "display_name": "Required Modal Conditions",
+      "description": "Describe the reviewed engineering requirements in plain text. This worksheet does not generate a program.",
+      "category": "sequences",
+      "value_type": "text",
+      "allowed_units": [],
+      "applicable_machine_types": [
+        "ALL"
+      ],
+      "normally_important": true,
+      "display_order": 43
+    }
+  ]
+}

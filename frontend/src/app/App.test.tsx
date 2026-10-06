@@ -1,3 +1,4 @@
+import { documentsApi } from "../api/documents";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
@@ -14,6 +15,7 @@ function open(route = "/") {
 describe("UI shell", () => {
   beforeEach(() => {
     vi.spyOn(machinesApi, "list").mockResolvedValue([]);
+    vi.spyOn(documentsApi, "list").mockResolvedValue([]);
   });
   it("renders the app and exactly four primary navigation links", () => {
     open();
@@ -76,7 +78,7 @@ describe("UI shell", () => {
     await user.click(screen.getByRole("tab", { name: "Machine Profile" }));
     expect(
       within(screen.getByRole("tabpanel")).getByText(
-        "No machine facts have been confirmed yet.",
+        "Save a Machine to enter and review its profile information.",
       ),
     ).toBeInTheDocument();
     await user.keyboard("{ArrowRight}");
@@ -121,20 +123,15 @@ describe("UI shell", () => {
     expect(screen.getByLabelText("Machine Name")).toHaveFocus();
     expect(create).not.toHaveBeenCalled();
   });
-  it("keeps upload and extraction unavailable", async () => {
+  it("keeps extraction unavailable", async () => {
     const user = userEvent.setup();
-    const documents = open("/documents");
-    expect(
-      screen.getByRole("button", { name: "Upload Document" }),
-    ).toBeDisabled();
-    documents.unmount();
     open("/machines/demo");
     await user.click(screen.getByRole("tab", { name: "Machine Profile" }));
     expect(
-      screen.getByRole("button", { name: "Extract Machine Facts" }),
+      screen.getByRole("button", { name: "Find Information" }),
     ).toBeDisabled();
     expect(
-      screen.getByRole("button", { name: "Add Fact Manually" }),
-    ).toBeDisabled();
+      screen.queryByRole("button", { name: "Add Information" }),
+    ).not.toBeInTheDocument();
   });
 });

@@ -136,6 +136,6 @@ def test_startup_migration_and_restart_persistence(tmp_path):
     with TestClient(create_app(path)) as client:
         assert client.get("/api/machines?status=ACTIVE").json()[0]["id"] == machine["id"]
     with sqlite3.connect(path) as db:
-        assert db.execute("PRAGMA user_version").fetchone()[0] == 1
-        assert db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall() == [("machines",)]
+        assert db.execute("PRAGMA user_version").fetchone()[0] == 3
+        assert db.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall() == [("machines",), ("documents",), ("profile_facts",)]
         assert db.execute("SELECT count(*) FROM machines").fetchone()[0] == 1

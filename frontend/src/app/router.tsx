@@ -6,6 +6,9 @@ import AddMachinePage from "../features/machines/AddMachinePage";
 import MachinePage from "../features/machines/MachinePage";
 import EditMachinePage from "../features/machines/EditMachinePage";
 import DocumentsPage from "../features/documents/DocumentsPage";
+import UploadDocumentPage from "../features/documents/UploadDocumentPage";
+import DocumentDetailPage from "../features/documents/DocumentDetailPage";
+import EditDocumentPage from "../features/documents/EditDocumentPage";
 import PostBuilderPage from "../features/posts/PostBuilderPage";
 import PostPage from "../features/posts/PostPage";
 export function AppRoutes() {
@@ -19,6 +22,12 @@ export function AppRoutes() {
         <Route path="machines/:machineId" element={<MachinePage />} />
         <Route path="machines/:machineId/edit" element={<EditMachinePage />} />
         <Route path="documents" element={<DocumentsPage />} />
+        <Route path="documents/upload" element={<UploadDocumentPage />} />
+        <Route path="documents/:documentId" element={<DocumentDetailPage />} />
+        <Route
+          path="documents/:documentId/edit"
+          element={<EditDocumentPage />}
+        />
         <Route path="posts" element={<PostBuilderPage />} />
         <Route path="posts/:postId" element={<PostPage />} />
         <Route

@@ -12,16 +12,26 @@ export async function request<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
+  const resource = path.includes("/profile")
+    ? "profile"
+    : path.startsWith("/documents")
+      ? "document"
+      : "machine";
   let response: Response;
   try {
     response = await fetch(`/api${path}`, {
       ...options,
-      headers: { "Content-Type": "application/json", ...options.headers },
+      headers: {
+        ...(options.body instanceof FormData
+          ? {}
+          : { "Content-Type": "application/json" }),
+        ...options.headers,
+      },
     });
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") throw error;
     throw new ApiError(
-      "Cannot reach the machine service. Check that the backend is running and try again.",
+      `Cannot reach the ${resource} service. Check that the backend is running and try again.`,
     );
   }
   if (!response.ok) {
@@ -37,14 +47,24 @@ export async function request<T>(
         }
       }
     }
+    if (
+      resource !== "machine" &&
+      typeof body.field === "string" &&
+      typeof body.detail === "string"
+    )
+      fields[body.field] = body.detail;
     const message =
-      response.status === 404
-        ? "Machine not found."
-        : response.status === 422
-          ? "Check the highlighted fields."
-          : response.status === 503
-            ? "Machine data is temporarily unavailable. Try again."
-            : "The machine request could not be completed. Try again.";
+      resource !== "machine" &&
+      [400, 404, 413, 415, 422, 503].includes(response.status) &&
+      typeof body.detail === "string"
+        ? body.detail
+        : response.status === 404
+          ? `${resource === "document" ? "Document" : "Machine"} not found.`
+          : response.status === 422
+            ? "Check the highlighted fields."
+            : response.status === 503
+              ? `${resource === "document" ? "Document" : "Machine"} data is temporarily unavailable. Try again.`
+              : `The ${resource} request could not be completed. Try again.`;
     throw new ApiError(message, response.status, fields);
   }
   return response.json() as Promise<T>;

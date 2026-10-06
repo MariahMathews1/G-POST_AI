@@ -1,3 +1,4 @@
+import { documentsApi } from "../../api/documents";
 import { render, screen, within, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
@@ -41,6 +42,7 @@ async function fill(user: ReturnType<typeof userEvent.setup>) {
 
 beforeEach(() => {
   records = [];
+  vi.spyOn(documentsApi, "list").mockResolvedValue([]);
   vi.spyOn(machinesApi, "list").mockImplementation(async (status) =>
     records.filter((machine) => !status || machine.status === status),
   );

@@ -53,8 +53,16 @@ function MachineWorkspace({ id }: { id: string }) {
               <MachineOverviewTab machine={machine} onChange={setMachine} />
             ),
           },
-          { label: "Documents", content: <MachineDocumentsTab /> },
-          { label: "Machine Profile", content: <MachineProfileTab /> },
+          {
+            label: "Documents",
+            content: <MachineDocumentsTab machineId={id} />,
+          },
+          {
+            label: "Machine Profile",
+            content: (
+              <MachineProfileTab key={machine.updated_at} machineId={id} />
+            ),
+          },
           { label: "Shop Knowledge", content: <MachineShopKnowledgeTab /> },
           { label: "Posts", content: <MachinePostsTab /> },
         ]}
