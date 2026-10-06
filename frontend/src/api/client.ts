@@ -55,7 +55,7 @@ export async function request<T>(
       fields[body.field] = body.detail;
     const message =
       resource !== "machine" &&
-      [400, 404, 413, 415, 422, 503].includes(response.status) &&
+      [400, 404, 409, 413, 415, 422, 503].includes(response.status) &&
       typeof body.detail === "string"
         ? body.detail
         : response.status === 404

@@ -5,12 +5,15 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 from app.core.config import database_path, document_storage_path, maximum_upload_size
-from app.core.database import initialize_database
+from app.core.database import initialize_database, connect
 from app.machines.routes import router
 from app.machines.service import MachineNotFound
 from app.documents.routes import router as documents_router
 from app.documents.models import DocumentError
 from app.machine_profiles.routes import router as profiles_router
+from app.documents.processing.routes import router as processing_router
+from app.documents.processing.config import ProcessingSettings
+from app.documents.processing.processor import recover_interrupted
 
 
 def create_app(db_path: Path | None = None, storage_dir: Path | None = None, max_file_size: int | None = None) -> FastAPI:
@@ -19,6 +22,11 @@ def create_app(db_path: Path | None = None, storage_dir: Path | None = None, max
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         initialize_database(path)
+        database = connect(path)
+        try:
+            recover_interrupted(database)
+        finally:
+            database.close()
         app.state.document_storage.mkdir(parents=True, exist_ok=True)
         yield
 
@@ -27,6 +35,8 @@ def create_app(db_path: Path | None = None, storage_dir: Path | None = None, max
     app.include_router(router)
     app.include_router(documents_router)
     app.include_router(profiles_router)
+    app.include_router(processing_router)
+    app.state.processing_settings = ProcessingSettings.from_environment()
     app.state.document_storage = storage_dir if storage_dir is not None else document_storage_path(path)
     app.state.max_file_size = max_file_size if max_file_size is not None else maximum_upload_size()
     if app.state.max_file_size <= 0:

@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import App from "../../app/App";
 import { documentsApi } from "../../api/documents";
+import { documentTextApi } from "../../api/documentText";
 import { machinesApi } from "../../api/machines";
 import { ApiError } from "../../api/client";
 import type { DocumentRecord } from "../../types/document";
@@ -65,6 +66,19 @@ async function fill(user: ReturnType<typeof userEvent.setup>) {
 }
 beforeEach(() => {
   records = [];
+  vi.spyOn(documentTextApi, "status").mockResolvedValue({
+    document_id: fixture.id,
+    state: "NOT_PROCESSED",
+    total_pages: 0,
+    pages_processed: 0,
+    native_text_pages: 0,
+    ocr_pages: 0,
+    plain_text_pages: 0,
+    pages_with_no_usable_text: 0,
+    message: "",
+    started_at: null,
+    processed_at: null,
+  });
   vi.spyOn(machinesApi, "list").mockResolvedValue([machine]);
   vi.spyOn(machinesApi, "get").mockResolvedValue(machine);
   vi.spyOn(documentsApi, "list").mockImplementation(async (filters) =>
@@ -267,6 +281,9 @@ describe("Document management", () => {
     open(`/documents/${fixture.id}`);
     await screen.findByRole("heading", { name: fixture.title, level: 1 });
     expect(screen.getByText(fixture.original_filename)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Document Text" }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: "View / Open File" }),
     ).toHaveAttribute("href", `/api/documents/${fixture.id}/file`);

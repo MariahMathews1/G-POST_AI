@@ -5,6 +5,7 @@ import { documentsApi } from "../../api/documents";
 import { documentTypes } from "../../types/document";
 import { useDocument } from "./useDocument";
 import { fileSize } from "./format";
+import DocumentTextSection from "./DocumentTextSection";
 function DocumentDetail({ id }: { id: string }) {
   const { document, setDocument, loading, error, retry } = useDocument(id);
   const [busy, setBusy] = useState(false);
@@ -142,6 +143,7 @@ function DocumentDetail({ id }: { id: string }) {
           </p>
         )}
       </div>
+      <DocumentTextSection id={id} fileType={document.file_type} />
     </>
   );
 }

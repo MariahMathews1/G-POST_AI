@@ -904,3 +904,30 @@ tbody tr:last-child td {
     padding: var(--space-4);
   }
 }
+
+.document-text-section {
+  margin-top: var(--space-5);
+}
+.document-text-summary {
+  margin-top: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+.prepared-text-viewer {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+.prepared-page-selector {
+  max-width: 400px;
+}
+.prepared-page-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 520px;
+  overflow: auto;
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}

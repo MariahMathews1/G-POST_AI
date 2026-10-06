@@ -233,8 +233,8 @@ def test_migration_from_sprint_1_and_persistence(tmp_path):
         assert persisted["status"] == "ARCHIVED"
         assert client.get(f"/api/documents/{document['id']}/file").content == PDF
     with connect(path) as db:
-        assert db.execute("PRAGMA user_version").fetchone()[0] == 3
-        assert [row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")] == ["machines", "documents", "profile_facts"]
+        assert db.execute("PRAGMA user_version").fetchone()[0] == 5
+        assert [row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")] == ["machines", "documents", "profile_facts", "document_processing", "document_page_text"]
         assert db.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         with pytest.raises(sqlite3.IntegrityError):
             db.execute("DELETE FROM machines WHERE id='existing'")
