@@ -1,6 +1,6 @@
 # Creo NC G-POST Companion V2 Blueprint
 
-This is a plan for a minimal engineering companion, written for NC programmers and developers learning the project. Current implementation status: **Sprint 4A — Document processing foundation functional.** Machines, Documents, and the refined manual Machine Profile remain functional. Local Python processing now prepares persistent page-aware PDF/TXT/MD text, trying native PDF text before local OCR fallback. Original files and Machine Profile values are preserved. Document Detail shows preparation state and read-only page inspection. Profile fact search, extraction candidates, Apply/Reject, Shop Knowledge, and Posts are not implemented; Find Information remains disabled. There is no Azure, MATLAB, OFG/FIL logic, generative AI, RAG, or export implementation. Architecture and later-sprint capabilities below remain proposals. See [Sprint 1](sprints/SPRINT_001_MACHINES.md), [Sprint 2](sprints/SPRINT_002_DOCUMENTS.md), [Sprint 3](sprints/SPRINT_003_MACHINE_PROFILE.md), and [Sprint 4A](sprints/SPRINT_004A_DOCUMENT_PROCESSING.md) for the implemented slices. The Sprint 3 guide supersedes the earlier three-section profile sketch below.
+This is a plan for a minimal engineering companion, written for NC programmers and developers learning the project. Current implementation status: **Sprint 4B — Targeted Machine Profile extraction functional.** Machines, Documents, the refined manual Machine Profile, and local page-aware PDF/TXT/MD preparation remain functional. Find Information now searches selected facts in selected prepared references using local deterministic Python rules, storing separate candidates with source/page/evidence. Explicit Apply writes a Needs Review profile value; Reject retains the proposal without modifying the profile. Human confirmation remains separate. Shop Knowledge and Posts are not implemented. There is no Azure, MATLAB, OFG/FIL logic, generative AI, RAG, or export implementation. Architecture and later-sprint capabilities below remain proposals. See [Sprint 1](sprints/SPRINT_001_MACHINES.md), [Sprint 2](sprints/SPRINT_002_DOCUMENTS.md), [Sprint 3](sprints/SPRINT_003_MACHINE_PROFILE.md), [Sprint 4A](sprints/SPRINT_004A_DOCUMENT_PROCESSING.md), and [Sprint 4B](sprints/SPRINT_004B_TARGETED_EXTRACTION.md) for the implemented slices. The Sprint 3 guide supersedes the earlier three-section profile sketch below.
 
 **NC** means numerical control: instructions used to operate a CNC machine. A **postprocessor** converts manufacturing instructions from a CAM system into output suited to a machine and controller. **CAM** means computer-aided manufacturing. The Companion assists the engineering work around that postprocessor; the official tools perform their existing jobs.
 
@@ -92,7 +92,7 @@ flowchart TD
 
 1. **Create Machine.** Identify one physical machine and its controller context. This is the home for its documents, facts, and post development work.
 2. **Upload Documents.** Attach allowed manuals and references to that machine. Give each document a useful type and name so its evidence can be found again.
-3. **Extract / Enter Machine Facts.** Enter a few important facts manually or use the later deterministic extraction feature. Extracted values start as proposals, not trusted facts.
+3. **Extract / Enter Machine Facts.** Enter a few important facts manually or use Find Information for supported facts. Extracted values start as proposals, not trusted facts.
 4. **Engineer Reviews Facts.** Check values, units, and source passages. Confirm supported facts and record questions when evidence is missing or conflicting.
 5. **Machine Profile.** See the confirmed facts, proposals awaiting review, and missing required information together. This is the current reviewed understanding of the machine.
 6. **Create Post Record.** Open a development effort for a machine-specific postprocessor. The record tracks configuration decisions and the engineering handoff.
@@ -235,7 +235,7 @@ flowchart LR
     R --> M[Machine Profile]
 ```
 
-Python is the default future extraction implementation. MATLAB may later be another provider if it proves useful; MATLAB is not required.
+Python implements the current deterministic extraction subset. MATLAB may later be another provider if it proves useful; MATLAB is not required.
 
 ```text
 ExtractionProvider

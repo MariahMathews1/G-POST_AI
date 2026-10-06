@@ -1,0 +1,333 @@
+{
+  "controller_version": {
+    "extractor": "labeled_text",
+    "search_terms": [
+      "controller series / version",
+      "controller series",
+      "controller version",
+      "control series",
+      "CNC series"
+    ],
+    "max_value_characters": 120,
+    "preferred_document_types": [
+      "CONTROLLER_MANUAL",
+      "PROGRAMMING_MANUAL"
+    ],
+    "value_pattern": "(?=.*[0-9])[A-Za-z0-9 ._+/()\\-]{2,120}"
+  },
+  "programming_units": {
+    "extractor": "programming_units",
+    "search_terms": [
+      "programming units",
+      "program units",
+      "input units",
+      "programming unit system"
+    ],
+    "choices": {
+      "Metric": [
+        "metric",
+        "mm",
+        "millimeters",
+        "millimetres"
+      ],
+      "Imperial": [
+        "imperial",
+        "inch",
+        "inches",
+        "in"
+      ]
+    },
+    "preferred_document_types": [
+      "CONTROLLER_MANUAL",
+      "PROGRAMMING_MANUAL"
+    ]
+  },
+  "controlled_axes": {
+    "extractor": "axis_count",
+    "search_terms": [
+      "number of controlled axes",
+      "number of control axes",
+      "controlled axis count",
+      "controlled axes",
+      "number of axes"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "linear_axes": {
+    "extractor": "linear_axes",
+    "search_terms": [
+      "linear axes",
+      "controlled linear axes"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "axis_configuration": {
+    "extractor": "labeled_text",
+    "search_terms": [
+      "axis configuration",
+      "controlled axis arrangement",
+      "axis arrangement"
+    ],
+    "max_value_characters": 180,
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ],
+    "value_pattern": ".*(?:\\b[XYZABC]\\b|\\b\\d+\\s*[- ]axis\\b).*"
+  },
+  "x_minimum": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "x axis minimum",
+      "x minimum",
+      "x min",
+      "minimum x axis position",
+      "x axis negative limit",
+      "x negative limit"
+    ],
+    "unit_aliases": {
+      "mm": "mm",
+      "millimeter": "mm",
+      "millimeters": "mm",
+      "millimetre": "mm",
+      "millimetres": "mm",
+      "in": "in",
+      "inch": "in",
+      "inches": "in",
+      "\"": "in"
+    },
+    "range_policy": "none",
+    "related_search_terms": [
+      "x axis travel",
+      "x travel",
+      "x stroke",
+      "x travel range"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "x_maximum": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "x axis maximum",
+      "x maximum",
+      "x max",
+      "maximum x axis position",
+      "x axis positive limit",
+      "x positive limit"
+    ],
+    "unit_aliases": {
+      "mm": "mm",
+      "millimeter": "mm",
+      "millimeters": "mm",
+      "millimetre": "mm",
+      "millimetres": "mm",
+      "in": "in",
+      "inch": "in",
+      "inches": "in",
+      "\"": "in"
+    },
+    "range_policy": "none",
+    "related_search_terms": [
+      "x axis travel",
+      "x travel",
+      "x stroke",
+      "x travel range"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "y_minimum": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "y axis minimum",
+      "y minimum",
+      "y min",
+      "minimum y axis position",
+      "y axis negative limit",
+      "y negative limit"
+    ],
+    "unit_aliases": {
+      "mm": "mm",
+      "millimeter": "mm",
+      "millimeters": "mm",
+      "millimetre": "mm",
+      "millimetres": "mm",
+      "in": "in",
+      "inch": "in",
+      "inches": "in",
+      "\"": "in"
+    },
+    "range_policy": "none",
+    "related_search_terms": [
+      "y axis travel",
+      "y travel",
+      "y stroke",
+      "y travel range"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "y_maximum": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "y axis maximum",
+      "y maximum",
+      "y max",
+      "maximum y axis position",
+      "y axis positive limit",
+      "y positive limit"
+    ],
+    "unit_aliases": {
+      "mm": "mm",
+      "millimeter": "mm",
+      "millimeters": "mm",
+      "millimetre": "mm",
+      "millimetres": "mm",
+      "in": "in",
+      "inch": "in",
+      "inches": "in",
+      "\"": "in"
+    },
+    "range_policy": "none",
+    "related_search_terms": [
+      "y axis travel",
+      "y travel",
+      "y stroke",
+      "y travel range"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "z_minimum": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "z axis minimum",
+      "z minimum",
+      "z min",
+      "minimum z axis position",
+      "z axis negative limit",
+      "z negative limit"
+    ],
+    "unit_aliases": {
+      "mm": "mm",
+      "millimeter": "mm",
+      "millimeters": "mm",
+      "millimetre": "mm",
+      "millimetres": "mm",
+      "in": "in",
+      "inch": "in",
+      "inches": "in",
+      "\"": "in"
+    },
+    "range_policy": "none",
+    "related_search_terms": [
+      "z axis travel",
+      "z travel",
+      "z stroke",
+      "z travel range"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "z_maximum": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "z axis maximum",
+      "z maximum",
+      "z max",
+      "maximum z axis position",
+      "z axis positive limit",
+      "z positive limit"
+    ],
+    "unit_aliases": {
+      "mm": "mm",
+      "millimeter": "mm",
+      "millimeters": "mm",
+      "millimetre": "mm",
+      "millimetres": "mm",
+      "in": "in",
+      "inch": "in",
+      "inches": "in",
+      "\"": "in"
+    },
+    "range_policy": "none",
+    "related_search_terms": [
+      "z axis travel",
+      "z travel",
+      "z stroke",
+      "z travel range"
+    ],
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "maximum_spindle_speed": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "maximum spindle speed",
+      "max spindle speed",
+      "spindle speed maximum",
+      "max spindle rpm",
+      "maximum spindle rpm",
+      "spindle speed range"
+    ],
+    "unit_aliases": {
+      "rpm": "rpm",
+      "rev/min": "rpm",
+      "r/min": "rpm",
+      "min^-1": "rpm",
+      "min-1": "rpm",
+      "min⁻¹": "rpm"
+    },
+    "range_policy": "upper",
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  },
+  "maximum_feedrate": {
+    "extractor": "number_with_unit",
+    "search_terms": [
+      "maximum feedrate",
+      "maximum feed rate",
+      "max feedrate",
+      "max feed rate",
+      "feedrate maximum",
+      "feed rate range"
+    ],
+    "unit_aliases": {
+      "mm/min": "mm/min",
+      "mm/minute": "mm/min",
+      "millimeters/min": "mm/min",
+      "millimetres/min": "mm/min",
+      "in/min": "in/min",
+      "inch/min": "in/min",
+      "inches/min": "in/min",
+      "inches per minute": "in/min",
+      "ipm": "in/min"
+    },
+    "range_policy": "upper",
+    "preferred_document_types": [
+      "MACHINE_MANUAL",
+      "SPECIFICATION_SHEET"
+    ]
+  }
+}

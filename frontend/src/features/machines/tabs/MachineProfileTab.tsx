@@ -6,6 +6,7 @@ import {
   type ProfileFact,
 } from "../../../types/machineProfile";
 import FactEditor from "../../machineProfiles/FactEditor";
+import FindInformation from "../../machineProfiles/FindInformation";
 
 function displayValue(fact: ProfileFact) {
   if (fact.value === null) return "—";
@@ -41,6 +42,7 @@ export default function MachineProfileTab({
     identity: true,
   });
   const [selected, setSelected] = useState<ProfileFact | null>(null);
+  const [finding, setFinding] = useState(false);
   useEffect(() => {
     if (machineId === "demo") return;
     const controller = new AbortController();
@@ -68,17 +70,22 @@ export default function MachineProfileTab({
       <div className="actions">
         <button
           className="button"
-          disabled
-          aria-describedby="find-information-help"
+          disabled={!profile}
+          onClick={() => setFinding(true)}
         >
           Find Information
         </button>
       </div>
-      <p className="helper" id="find-information-help">
-        Document search will be added in a later sprint.
-      </p>
     </>
   );
+  if (finding && profile)
+    return (
+      <FindInformation
+        profile={profile}
+        onProfileChanged={setProfile}
+        onBack={() => setFinding(false)}
+      />
+    );
   if (selected)
     return (
       <FactEditor

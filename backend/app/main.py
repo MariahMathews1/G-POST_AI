@@ -14,6 +14,7 @@ from app.machine_profiles.routes import router as profiles_router
 from app.documents.processing.routes import router as processing_router
 from app.documents.processing.config import ProcessingSettings
 from app.documents.processing.processor import recover_interrupted
+from app.profile_extraction.routes import router as extraction_router
 
 
 def create_app(db_path: Path | None = None, storage_dir: Path | None = None, max_file_size: int | None = None) -> FastAPI:
@@ -36,6 +37,7 @@ def create_app(db_path: Path | None = None, storage_dir: Path | None = None, max
     app.include_router(documents_router)
     app.include_router(profiles_router)
     app.include_router(processing_router)
+    app.include_router(extraction_router)
     app.state.processing_settings = ProcessingSettings.from_environment()
     app.state.document_storage = storage_dir if storage_dir is not None else document_storage_path(path)
     app.state.max_file_size = max_file_size if max_file_size is not None else maximum_upload_size()

@@ -203,7 +203,7 @@ describe("Machine Profile worksheet", () => {
     ).not.toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "Find Information" }),
-    ).toBeDisabled();
+    ).toBeEnabled();
     expect(screen.getByText("35")).toBeInTheDocument();
     expect(screen.queryByText("2026-10-06")).not.toBeInTheDocument();
   });

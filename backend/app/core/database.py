@@ -3,7 +3,7 @@ from pathlib import Path
 from fastapi import Request
 
 MIGRATIONS = Path(__file__).resolve().parents[2] / "migrations"
-MIGRATION_FILES = ["001_create_machines.sql", "002_create_documents.sql", "003_create_profile_facts.sql", "004_create_document_processing.sql", "005_create_document_page_text.sql"]
+MIGRATION_FILES = ["001_create_machines.sql", "002_create_documents.sql", "003_create_profile_facts.sql", "004_create_document_processing.sql", "005_create_document_page_text.sql", "006_create_profile_search_runs.sql", "007_create_profile_candidates.sql"]
 
 
 def connect(path: Path) -> sqlite3.Connection:

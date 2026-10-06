@@ -88,7 +88,7 @@ def get_profile(db: sqlite3.Connection, machine_id: str):
     return dict(machine_id=machine_id, categories=CATALOG['categories'], facts=facts, summary=summary)
 
 
-def save_fact(db: sqlite3.Connection, machine_id: str, key: str, data: FactInput):
+def save_fact(db: sqlite3.Connection, machine_id: str, key: str, data: FactInput, *, commit: bool = True):
     machine = get_machine(db, machine_id)
     definition = DEFINITIONS.get(key)
     if not definition:
@@ -109,5 +109,6 @@ def save_fact(db: sqlite3.Connection, machine_id: str, key: str, data: FactInput
         source_type=excluded.source_type, source_document_id=excluded.source_document_id, source_location=excluded.source_location,
         engineering_notes=excluded.engineering_notes, updated_at=excluded.updated_at''',
         (machine_id, key, json.dumps(value, allow_nan=False) if value is not None else None, data.unit, data.status, 'DOCUMENT_REFERENCE' if document_id else 'PROGRAMMER_ENTRY', document_id, data.source_location, data.engineering_notes, now, now))
-    db.commit()
+    if commit:
+        db.commit()
     return get_profile(db, machine_id)

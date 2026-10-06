@@ -19,6 +19,7 @@ export interface FactDefinition {
   machine_field?: string;
   choices?: string[];
   future_use?: string;
+  extraction?: { eligible: boolean };
 }
 export interface RotaryAxis {
   axis: "A" | "B" | "C";

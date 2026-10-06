@@ -6,7 +6,7 @@ Machine → Documents → Machine Profile → Post Record → OFG Settings → C
 
 ## Current Status
 
-**Sprint 4A — Document processing foundation functional.**
+**Sprint 4B — Targeted Machine Profile extraction functional.**
 
 Machines remain functional. Reference documents can now be uploaded, associated with one saved Machine, listed globally or under that Machine, viewed/downloaded, edited, archived, and restored. Dashboard counts active Machines and Documents. SQLite stores document metadata; `backend/data/documents/` stores original files.
 
@@ -14,9 +14,11 @@ Machine Profile now provides 43 configuration-driven definitions, live Machine i
 
 Document Detail now supports Prepare for Search / Reprocess, local native PDF text followed by per-page OCR only when needed, TXT/MD preparation, persistent one-based page text, and read-only page inspection. Original files remain unchanged.
 
-There is no targeted fact extraction/search, Shop Knowledge data, Post management, OFG/FIL logic, ML, MATLAB, Azure, embeddings/RAG, exports, or authentication. Find Information remains disabled.
+Machine Profile → Find Information now searches selected prepared references for 13 configuration-driven facts using local deterministic Python rules. Candidates retain source/page/evidence and remain separate from the profile until explicit Apply. Apply sets Needs Review; Reject keeps traceability without changing the profile. Multiple candidates, related-only evidence, and missing information are shown explicitly.
 
-See the [V2 Blueprint](docs/V2_BLUEPRINT.md), [Sprint 1 guide](docs/sprints/SPRINT_001_MACHINES.md), [Sprint 2 guide](docs/sprints/SPRINT_002_DOCUMENTS.md), [Sprint 3 guide](docs/sprints/SPRINT_003_MACHINE_PROFILE.md), and [Sprint 4A guide](docs/sprints/SPRINT_004A_DOCUMENT_PROCESSING.md).
+There is no Shop Knowledge data, Post management, OFG/FIL logic, ML, MATLAB, Azure, generative AI, embeddings/RAG, exports, or authentication.
+
+See the [V2 Blueprint](docs/V2_BLUEPRINT.md), [Sprint 1 guide](docs/sprints/SPRINT_001_MACHINES.md), [Sprint 2 guide](docs/sprints/SPRINT_002_DOCUMENTS.md), [Sprint 3 guide](docs/sprints/SPRINT_003_MACHINE_PROFILE.md), [Sprint 4A guide](docs/sprints/SPRINT_004A_DOCUMENT_PROCESSING.md), and [Sprint 4B guide](docs/sprints/SPRINT_004B_TARGETED_EXTRACTION.md).
 
 ## Run locally
 
@@ -52,6 +54,6 @@ npm run typecheck
 npm run build
 ```
 
-Backend feature code lives in `backend/app/machines/`, `backend/app/documents/`, and `backend/app/machine_profiles/`; matching frontend screens live in `frontend/src/features/`. Sprint guides explain the files, data flow, APIs, and manual acceptance steps. Sprint 4A stops at page-aware text preparation; profile fact search remains future work.
+Backend feature code lives in `backend/app/machines/`, `backend/app/documents/`, `backend/app/machine_profiles/`, and `backend/app/profile_extraction/`; matching frontend screens live in `frontend/src/features/`. Sprint guides explain the files, data flow, APIs, and manual acceptance steps. Sprint 4B stops at deterministic proposals and human Apply/Reject; complex fact interpretation remains future work.
 
 Framework references: [FastAPI testing](https://fastapi.tiangolo.com/tutorial/testing/), [Vite setup](https://vite.dev/guide/), and [React Router routing](https://reactrouter.com/start/declarative/routing).
