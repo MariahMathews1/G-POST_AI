@@ -1,26 +1,29 @@
 # Creo NC G-POST Companion V2
 
-The application is an engineering companion for NC programmers developing machine-specific Creo G-POST postprocessors.
-
-It helps organize machine/controller documentation, build a reviewed Machine Profile, prepare an OFG configuration checklist, track custom FIL/CIMFIL requirements, and export a Post Development Package.
-
-It does not replace Creo, G-POST, the Option File Generator, or VERICUT.
-
-## Simple workflow
+An engineering companion for NC programmers developing machine-specific Creo G-POST postprocessors. It will organize machine references, reviewed Machine Profiles, OFG guidance, custom FIL/CIMFIL requirements, and engineering handoff packages. It does not replace Creo, G-POST, OFG, or VERICUT.
 
 Machine → Documents → Machine Profile → Post Record → OFG Settings → Custom Logic if needed → Review & Export → Official G-POST workflow
 
-Read the [V2 Blueprint](docs/V2_BLUEPRINT.md) for the screens, data, boundaries, proposed architecture, and sprint plan.
-
 ## Current Status
 
-**V2 Sprint 0/1 — UI shell only.**
+**Sprint 1 — Machines functional.**
 
-The current implementation contains navigation and placeholder screens only. No backend, persistence, extraction, Azure, MATLAB, OFG logic, FIL generation, or exports have been implemented. Form entries are not saved. Future actions are disabled; demo records are static examples.
+Machines can be created, listed, opened, edited, archived, and restored. SQLite preserves records across refresh and backend restart. Dashboard counts active machines. All other areas remain static placeholders: no document uploads, Machine Profile or Shop Knowledge data, Posts, OFG/FIL logic, extraction, ML, MATLAB, Azure, evidence packets, exports, or authentication.
+
+See the [V2 Blueprint](docs/V2_BLUEPRINT.md) and [Sprint 1 guide](docs/sprints/SPRINT_001_MACHINES.md).
 
 ## Run locally
 
-Use Node.js 22.12+, 24.x, or 26+ and npm.
+Use Python 3.12+ with [uv](https://docs.astral.sh/uv/), and Node.js 22.12+, 24.x, or 26+ with npm. From the repository root, start two terminals:
+
+**Backend**
+
+```sh
+uv sync --directory backend
+uv run --directory backend uvicorn app.main:app --reload --host 127.0.0.1 --port 8010
+```
+
+**Frontend**
 
 ```sh
 cd frontend
@@ -28,15 +31,21 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. Inspect `/machines/demo` and `/posts/demo` for the example workspaces. Vite supports direct navigation and refresh on these routes in development; a future static host must route application URLs to `index.html`.
+Open the URL printed by Vite (normally `http://localhost:5173`). Its `/api` proxy connects to the backend at `127.0.0.1:8010`. The backend creates `backend/data/companion.sqlite3` automatically and applies the initial migration once. No seed records are created on startup. Set `COMPANION_DB_PATH` to use a different database file.
+
+`/machines/demo` remains a labeled, unsaved UI example; it cannot be edited or archived and never contributes to counts. `/posts/demo` remains a static Post example. Use **Add Machine** for real saved records.
+
+## Verify
 
 ```sh
+uv run --directory backend pytest
+cd frontend
 npm test
 npm run lint
 npm run typecheck
 npm run build
 ```
 
-Frontend code lives in `frontend/src`: `app/` for routes, `components/` for layout and shared UI, `features/` for pages, and `styles/` for theme tokens and CSS. The next recommended sprint is Machines CRUD (create, read, update, archive), scoped separately before implementation.
+Backend code lives in `backend/app/machines/`; frontend machine screens live in `frontend/src/features/machines/`. The sprint guide explains the files, data flow, API, and manual acceptance steps. The next recommended sprint is Documents, after a separately agreed scope.
 
-Framework references: [Vite setup](https://vite.dev/guide/) and [React Router routing](https://reactrouter.com/start/declarative/routing).
+Framework references: [FastAPI testing](https://fastapi.tiangolo.com/tutorial/testing/), [Vite setup](https://vite.dev/guide/), and [React Router routing](https://reactrouter.com/start/declarative/routing).

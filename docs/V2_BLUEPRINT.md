@@ -1,6 +1,6 @@
 # Creo NC G-POST Companion V2 Blueprint
 
-This is a plan for a minimal engineering companion, written for NC programmers and developers learning the project. Current implementation status: **V2 Sprint 0/1 — UI shell only.** The React frontend contains routing, navigation, a neutral green theme, empty screens, a non-saving form preview, and static demo workspaces. No backend, persistence, extraction, Azure, MATLAB, OFG logic, FIL generation, or exports are implemented. Architecture and later-sprint capabilities below remain proposals.
+This is a plan for a minimal engineering companion, written for NC programmers and developers learning the project. Current implementation status: **Sprint 1 — Machines functional.** A minimal FastAPI backend and one SQLite Machine table support create, list, view, edit, archive, and restore. The existing React shell and green theme are preserved; Dashboard counts active machines. Other tabs and areas remain placeholders. Extraction, Azure, MATLAB, OFG logic, FIL generation, and exports are not implemented. Architecture and later-sprint capabilities below remain proposals; see [Sprint 1](sprints/SPRINT_001_MACHINES.md) for the implemented slice.
 
 **NC** means numerical control: instructions used to operate a CNC machine. A **postprocessor** converts manufacturing instructions from a CAM system into output suited to a machine and controller. **CAM** means computer-aided manufacturing. The Companion assists the engineering work around that postprocessor; the official tools perform their existing jobs.
 

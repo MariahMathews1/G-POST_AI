@@ -1,7 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { machinesApi } from "../api/machines";
 import App from "./App";
 function open(route = "/") {
   return render(
@@ -11,6 +12,9 @@ function open(route = "/") {
   );
 }
 describe("UI shell", () => {
+  beforeEach(() => {
+    vi.spyOn(machinesApi, "list").mockResolvedValue([]);
+  });
   it("renders the app and exactly four primary navigation links", () => {
     open();
     expect(screen.getByText("G-POST Companion")).toBeInTheDocument();
@@ -108,15 +112,14 @@ describe("UI shell", () => {
       screen.getByRole("button", { name: "Export Package" }),
     ).toBeDisabled();
   });
-  it("returns from the preview form without creating a machine", async () => {
+  it("validates the Add Machine form before sending data", async () => {
     const user = userEvent.setup();
+    const create = vi.spyOn(machinesApi, "create");
     open("/machines/new");
-    await user.type(screen.getByLabelText("Machine Name"), "Preview machine");
     await user.click(screen.getByRole("button", { name: "Create Machine" }));
-    expect(
-      screen.getByText("No machines have been added yet."),
-    ).toBeInTheDocument();
-    expect(screen.queryByText("Preview machine")).not.toBeInTheDocument();
+    expect(screen.getByText("Machine Name is required.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Machine Name")).toHaveFocus();
+    expect(create).not.toHaveBeenCalled();
   });
   it("keeps upload and extraction unavailable", async () => {
     const user = userEvent.setup();

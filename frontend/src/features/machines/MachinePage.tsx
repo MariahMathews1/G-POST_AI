@@ -6,32 +6,53 @@ import MachineDocumentsTab from "./tabs/MachineDocumentsTab";
 import MachineProfileTab from "./tabs/MachineProfileTab";
 import MachineShopKnowledgeTab from "./tabs/MachineShopKnowledgeTab";
 import MachinePostsTab from "./tabs/MachinePostsTab";
-export default function MachinePage() {
-  const { machineId } = useParams();
-  if (machineId !== "demo")
+import { useMachine } from "./useMachine";
+function MachineWorkspace({ id }: { id: string }) {
+  const { machine, setMachine, loading, error, retry } = useMachine(id);
+  if (loading) return <p role="status">Loading machine…</p>;
+  if (error)
     return (
       <>
-        <PageHeader
-          title="Machine unavailable"
-          description="Only the demo machine is available in this UI sprint."
-        />
-        <Link to="/machines/demo">Open demo machine</Link>
+        <h1>
+          {error.status === 404 ? "Machine not found" : "Machine unavailable"}
+        </h1>
+        <p role="alert">{error.message}</p>
+        <Link to="/machines">Back to Machines</Link>
+        {error.status !== 404 && (
+          <button className="button retry-button" onClick={retry}>
+            Try again
+          </button>
+        )}
       </>
     );
+  if (!machine) return null;
   return (
     <>
       <Link className="back-link" to="/machines">
         ← Machines
       </Link>
       <PageHeader
-        title="KLS-1840N"
-        description="KENT · Lathe · FANUC 0i-TF"
-        action={<span className="badge">Demo machine</span>}
+        title={machine.name}
+        description={`${machine.manufacturer} · ${machine.machine_type} · ${machine.controller}`}
+        action={
+          <span className="badge">
+            {id === "demo"
+              ? "Demo machine · Not saved"
+              : machine.status === "ACTIVE"
+                ? "Active"
+                : "Archived"}
+          </span>
+        }
       />
       <Tabs
         label="Machine workspace"
         tabs={[
-          { label: "Overview", content: <MachineOverviewTab /> },
+          {
+            label: "Overview",
+            content: (
+              <MachineOverviewTab machine={machine} onChange={setMachine} />
+            ),
+          },
           { label: "Documents", content: <MachineDocumentsTab /> },
           { label: "Machine Profile", content: <MachineProfileTab /> },
           { label: "Shop Knowledge", content: <MachineShopKnowledgeTab /> },
@@ -40,4 +61,8 @@ export default function MachinePage() {
       />
     </>
   );
+}
+export default function MachinePage() {
+  const { machineId = "" } = useParams();
+  return <MachineWorkspace key={machineId} id={machineId} />;
 }
